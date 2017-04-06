@@ -35,7 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var chalk = require("chalk");
 var Registry_1 = require("./Registry");
 var registry = new Registry_1.default();
 function getRegistry() {
@@ -73,7 +72,7 @@ function instrumented(target, key, descriptor) {
     }
     var originalMethod = descriptor.value;
     var klass = target.constructor.name;
-    console.log("@instrumented decorator processing " + chalk.green(klass) + "." + chalk.green(key));
+    console.log("@instrumented decorator processing " + klass + "." + key);
     function overrideMethod() {
         var _this = this;
         var args = arguments;
@@ -96,7 +95,7 @@ function instrument(name, delegate) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    t = timer(name);
+                    t = timer(name + ".timer");
                     errors = meter(name + ".errors");
                     start = process.hrtime();
                     _a.label = 1;

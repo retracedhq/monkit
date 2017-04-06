@@ -1,6 +1,5 @@
 import * as metrics from "metrics";
 import * as _ from "lodash";
-import * as chalk from "chalk";
 import * as statsd from "node-statsd-client";
 import StatsdReporter from "./StatsdReporter";
 import StatusPageReporter from "./StatusPageReporter";
@@ -51,7 +50,7 @@ export function instrumented(target: any, key: string, descriptor: PropertyDescr
     }
     let originalMethod = descriptor.value;
     const klass = target.constructor.name;
-    console.log(`@instrumented decorator processing ${chalk.green(klass)}.${chalk.green(key)}`);
+    console.log(`@instrumented decorator processing ${klass}.${key}`);
 
     // this needs to be a non-arrow function or we'll get the wrong `this`
     function overrideMethod() {
