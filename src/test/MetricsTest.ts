@@ -2,47 +2,7 @@ import { suite, test } from "mocha-typescript";
 import { expect } from "chai";
 import { meter, timer, counter, histogram, instrumented, getRegistry } from "../metrics";
 
-@suite class MetricsTests {
-
-    @test public "metrics.counter()"() {
-        counter("foo.counter").inc(200);
-        counter("foo.counter").dec(100);
-
-        const count = counter("foo.counter").count;
-
-        expect(count).to.equal(100);
-    };
-
-    @test public "metrics.meter()"() {
-        meter("foo.bar").mark();
-        meter("foo.bar").mark();
-
-        const count = meter("foo.bar").count;
-
-        expect(count).to.equal(2);
-    };
-
-    @test public "metrics.histogram()"() {
-        histogram("foo.histogram").update(200);
-        histogram("foo.histogram").update(100);
-
-        const count = histogram("foo.histogram").count;
-        const mean = histogram("foo.histogram").mean();
-
-        expect(count).to.equal(2);
-        expect(mean).to.equal(150);
-    };
-
-    @test public "metrics.timer()"() {
-        timer("foo.baz").update(200);
-        timer("foo.baz").update(100);
-
-        const count = timer("foo.baz").count();
-        const mean = timer("foo.baz").mean();
-
-        expect(count).to.equal(2);
-        expect(mean).to.equal(150);
-    };
+@suite class MetricsTest {
 
     @test public async "@instrumented this binding"() {
         // tslint:disable-next-line:max-classes-per-file
@@ -85,7 +45,7 @@ import { meter, timer, counter, histogram, instrumented, getRegistry } from "../
         await d.throughputTracking();
         await d.throughputTracking();
 
-        const timer = getRegistry().getMetric("X5.throughputTracking");
+        const timer = getRegistry().getMetric("X5.throughputTracking.timer");
         expect(timer.count()).to.equal(2);
         expect(timer.mean()).to.be.lessThan(toNanos(sleepTime + 2));
         expect(timer.mean()).to.be.greaterThan(toNanos(sleepTime - 2));

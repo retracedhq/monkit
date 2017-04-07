@@ -1,3 +1,4 @@
+dist/test/*
 
 *.DS_Store
 .AppleDouble
@@ -79,3 +80,4 @@ jspm_packages
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
+
