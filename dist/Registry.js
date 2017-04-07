@@ -38,6 +38,7 @@ var Registry = (function () {
                 histograms.push(metric);
             }
         }
+        return { meters: meters, timers: timers, counters: counters, histograms: histograms };
     };
     Registry.prototype.meter = function (name) {
         return this.getOrCreate(name, metrics.Meter);

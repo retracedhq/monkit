@@ -57,6 +57,7 @@ export default class Registry {
                 histograms.push(metric);
             }
         }
+        return { meters, timers, counters, histograms };
     }
 
     /** get or create a meter with the given name */
