@@ -31,7 +31,8 @@
     ],
     "scripts": {
         "prepublish": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p .",
-        "test": "rm -rf ./dist && tsc -p . && mocha ./dist/test/*.js"
+        "test": "rm -rf ./dist && tsc -p . && mocha ./dist/test/*.js",
+        "publish-if-version-changed": "publish"
     },
     "devDependencies": {
         "@types/chai": "^3.4.34",
@@ -40,6 +41,7 @@
         "chai": "^3.5.0",
         "mocha": "^3.2.0",
         "mocha-typescript": "^1.0.15",
+        "publish": "^0.6.0",
         "tslint": "^4.3.1",
         "typescript": "^2.2.2"
     },
