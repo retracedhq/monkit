@@ -1,7 +1,7 @@
 {
     "version": "2.1.0",
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
         "module": "commonjs",
         "declaration": true,
         "outDir": "dist/",
@@ -21,6 +21,8 @@
         "./src/index.ts",
         "./src/metrics.ts",
         "./src/test/MetricsTest.ts",
-        "./src/test/RegistryTest.ts"
+        "./src/test/RegistryTest.ts",
+        "./src/test/StatsdReporterTest.ts",
+        "./src/test/StatusPageReporterTest.ts"
     ]
 }

@@ -14,7 +14,8 @@ dependencies:
 
 test:
   override:
-    - yarn test
+    - yarn cover-xml
+    - yarn report-coverage
 
 deployment:
   npm:

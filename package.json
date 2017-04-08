@@ -1,7 +1,7 @@
 {
     "name": "monkit",
     "author": "Replicated, Inc.",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "engines": {
         "node": ">=4.3.2"
     },
@@ -31,25 +31,36 @@
     ],
     "scripts": {
         "prepublish": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p .",
-        "test": "rm -rf ./dist && tsc -p . && mocha ./dist/test/*.js",
+        "test": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p . && mocha ./dist/test/*.js",
+        "cover": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p . && istanbul cover _mocha -- ./dist/test/*.js",
+        "cover-xml": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p . && istanbul cover _mocha -- -R mocha-junit-reporter ./dist/test/*.js",
+        "report-coverage": "codeclimate-test-reporter < ./coverage/lcov.info",
         "publish-if-version-changed": "publish"
     },
     "devDependencies": {
         "@types/chai": "^3.4.34",
         "@types/lodash": "^4.14.52",
         "@types/node": "^7.0.0",
+        "@types/request": "^0.0.42",
+        "@types/statsd-client": "^0.1.30",
         "chai": "^3.5.0",
+        "codeclimate-test-reporter": "^0.4.1",
+        "coveralls": "^2.13.0",
+        "istanbul": "^0.4.5",
         "mocha": "^3.2.0",
+        "mocha-junit-reporter": "^1.13.0",
         "mocha-typescript": "^1.0.15",
+        "nock": "^9.0.11",
         "publish": "^0.6.0",
         "tslint": "^4.3.1",
+        "typemoq": "^1.4.1",
         "typescript": "^2.2.2"
     },
     "dependencies": {
         "form-urlencoded": "^1.5.0",
         "lodash": "^4.17.4",
         "metrics": "^0.1.11",
-        "node-statsd-client": "^1.0.3",
-        "request": "^2.81.0"
+        "request": "^2.81.0",
+        "statsd-client": "^0.2.4"
     }
 }

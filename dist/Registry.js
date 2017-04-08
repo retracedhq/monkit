@@ -1,30 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var metrics = require("metrics");
-var Registry = (function () {
-    function Registry(metrics) {
+const metrics = require("metrics");
+class Registry {
+    constructor(metrics) {
         this.metrics = metrics || {};
     }
-    Registry.prototype.getMetric = function (name) {
+    getMetric(name) {
         return this.metrics[name];
-    };
-    Registry.prototype.addMetric = function (name, metric) {
+    }
+    addMetric(name, metric) {
         if (this.getMetric(name)) {
             return false;
         }
         this.metrics[name] = metric;
         return true;
-    };
-    Registry.prototype.getMetrics = function () {
-        var meters = [];
-        var timers = [];
-        var counters = [];
-        var histograms = [];
-        for (var _i = 0, _a = Object.keys(this.metrics); _i < _a.length; _i++) {
-            var name_1 = _a[_i];
-            var metric = this.metrics[name_1];
-            metric.name = name_1;
-            var metricType = Object.getPrototypeOf(metric);
+    }
+    getMetrics() {
+        let meters = [];
+        let timers = [];
+        let counters = [];
+        let histograms = [];
+        for (let name of Object.keys(this.metrics)) {
+            let metric = this.metrics[name];
+            metric.name = name;
+            let metricType = Object.getPrototypeOf(metric);
             if (metricType === metrics.Meter.prototype) {
                 meters.push(metric);
             }
@@ -38,26 +37,25 @@ var Registry = (function () {
                 histograms.push(metric);
             }
         }
-        return { meters: meters, timers: timers, counters: counters, histograms: histograms };
-    };
-    Registry.prototype.meter = function (name) {
+        return { meters, timers, counters, histograms };
+    }
+    meter(name) {
         return this.getOrCreate(name, metrics.Meter);
-    };
-    Registry.prototype.timer = function (name) {
+    }
+    timer(name) {
         return this.getOrCreate(name, metrics.Timer);
-    };
-    Registry.prototype.histogram = function (name) {
+    }
+    histogram(name) {
         return this.getOrCreate(name, metrics.Histogram);
-    };
-    Registry.prototype.counter = function (name) {
+    }
+    counter(name) {
         return this.getOrCreate(name, metrics.Counter);
-    };
-    Registry.prototype.getOrCreate = function (name, ctor) {
+    }
+    getOrCreate(name, ctor) {
         if (!this.getMetric(name)) {
             this.addMetric(name, new ctor());
         }
         return this.getMetric(name);
-    };
-    return Registry;
-}());
+    }
+}
 exports.default = Registry;

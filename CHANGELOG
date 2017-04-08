@@ -12,3 +12,6 @@
 
 0.2.0 / 2017-04-07
     * Fix missing return statement in `Registry.getMetrics()`
+
+0.3.0 / 2017-04-10
+    * Add tests, change compilation target to ES6, fix a few reporter bugs

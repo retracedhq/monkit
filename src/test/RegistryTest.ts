@@ -1,4 +1,3 @@
-
 import { suite, test } from "mocha-typescript";
 import { expect } from "chai";
 
@@ -7,7 +6,7 @@ const registry = new Registry();
 
 @suite class RegistryTest {
 
-    @test public "Registry.counter(name)"() {
+    @test public "Registry#counter(name)"() {
         registry.counter("foo.counter").inc(200);
         registry.counter("foo.counter").dec(100);
 
@@ -16,13 +15,13 @@ const registry = new Registry();
         expect(count).to.equal(100);
     };
 
-    @test public "Registry.meter(name)"() {
+    @test public "Registry#meter(name)"() {
         registry.meter("foo").mark();
         registry.meter("foo").mark();
         expect(registry.meter("foo").count).to.equal(2);
     }
 
-    @test public "Registry.histogram(name)"() {
+    @test public "Registry#histogram(name)"() {
         registry.histogram("foo.histogram").update(200);
         registry.histogram("foo.histogram").update(100);
 
@@ -33,7 +32,7 @@ const registry = new Registry();
         expect(mean).to.equal(150);
     };
 
-    @test public "Registry.timer(name)"() {
+    @test public "Registry#timer(name)"() {
         registry.timer("foo.baz").update(200);
         registry.timer("foo.baz").update(100);
 
@@ -44,7 +43,7 @@ const registry = new Registry();
         expect(mean).to.equal(150);
     };
 
-    @test public "Registry.getMetrics()"() {
+    @test public "Registry#getMetrics()"() {
         const r = new Registry();
         r.counter("foo.counter").dec(100);
         r.meter("foo.meter").mark();

@@ -1,8 +1,5 @@
 import * as request from "request";
-import * as metrics from "metrics";
-import * as _ from "lodash";
 import * as util from "util";
-import * as urlencoded from "form-urlencoded";
 import { toOpsPerMin, toMs } from "./metrics";
 import Registry from "./Registry";
 
@@ -87,7 +84,6 @@ export default class StatusPageReporter {
         }
 
         const now = Math.floor(new Date().getTime() / 1000);
-        const method = "POST";
         const host = this.url;
         const path = `/v1/pages/${this.pageId}/metrics/${metricId}/data.json`;
         const formData = { "data[timestamp]": now, "data[value]": value };
@@ -96,7 +92,7 @@ export default class StatusPageReporter {
             Authorization: `OAuth ${this.statusPageToken}`,
         };
 
-        request.post({ url: `https://${host}${path}`, formData, headers }, (err, resp, body) => {
+        request.post({ url: `https://${host}${path}`, formData, headers }, (err) => {
             if (err) {
                 console.error("couldn't post to statuspage.io:", util.inspect(err));
             }
@@ -104,7 +100,7 @@ export default class StatusPageReporter {
     };
 
     private reportCounter(counter): void {
-        this.reportMetric(counter.name, counter.count);
+        this.reportMetric(`${counter.name}.count`, counter.count);
     };
 
     private reportMeter(meter): void {
@@ -137,6 +133,7 @@ export default class StatusPageReporter {
 
     private reportHistogram(histogram): void {
         this.reportMetric(`${histogram.name}.count`, histogram.count);
+
         const percentiles = histogram.percentiles([.50, .75, .95, .98, .99, .999]);
         this.reportMetric(`${histogram.name}.mean`, histogram.min);
         this.reportMetric(`${histogram.name}.mean`, histogram.mean());
