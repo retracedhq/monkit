@@ -17,12 +17,14 @@
     "files": [
         "./src/StatsdReporter.ts",
         "./src/StatusPageReporter.ts",
+        "./src/SysdigNameRewriter.ts",
         "./src/Registry.ts",
         "./src/index.ts",
         "./src/metrics.ts",
         "./src/test/MetricsTest.ts",
         "./src/test/RegistryTest.ts",
         "./src/test/StatsdReporterTest.ts",
+        "./src/test/SysdigNameRewriterTest.ts",
         "./src/test/StatusPageReporterTest.ts"
     ]
 }

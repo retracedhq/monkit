@@ -15,3 +15,6 @@
 
 0.3.0 / 2017-04-10
     * Add tests, change compilation target to ES6, fix a few reporter bugs
+
+0.3.1 / 2017-04-13
+    * Support for name-rewriting hook in StatsdReporter, add Sysdig rewriter
