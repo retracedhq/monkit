@@ -28,14 +28,14 @@ export default class Registry {
 
     /**
      * Organize metrics by type, and attach names:
-     * 
+     *
      * {
      *   meters: [...],
      *   counters: [...],
      *   histograms: [...],
      *   timers: [...]
      * }
-     * 
+     *
      */
     public getMetrics(): any {
         let meters: any[] = [];

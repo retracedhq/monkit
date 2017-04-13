@@ -1,8 +1,3 @@
-import * as metrics from "metrics";
-import * as _ from "lodash";
-import * as statsd from "node-statsd-client";
-import StatsdReporter from "./StatsdReporter";
-import StatusPageReporter from "./StatusPageReporter";
 import Registry from "./Registry";
 
 const registry = new Registry();
@@ -68,9 +63,8 @@ export function instrumented(target: any, key: string, descriptor: PropertyDescr
 /**
  * Run the given function, recording throughput, latency and errors
  *
- * @param timer      a metrics.Timer
- * @param errorMeter a metrics.Meter
- * @param delegate   the function to run
+ * @param name     a name for the method
+ * @param delegate the function to run
  */
 export async function instrument(
     name: string,

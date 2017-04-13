@@ -1,6 +1,6 @@
 import { suite, test } from "mocha-typescript";
 import { expect } from "chai";
-import { meter, timer, counter, histogram, instrumented, getRegistry } from "../metrics";
+import { instrumented, getRegistry } from "../metrics";
 
 @suite class MetricsTest {
 
@@ -47,8 +47,8 @@ import { meter, timer, counter, histogram, instrumented, getRegistry } from "../
 
         const timer = getRegistry().getMetric("X5.throughputTracking.timer");
         expect(timer.count()).to.equal(2);
-        expect(timer.mean()).to.be.lessThan(toNanos(sleepTime + 2));
-        expect(timer.mean()).to.be.greaterThan(toNanos(sleepTime - 2));
+        expect(timer.mean()).to.be.lessThan(toNanos(sleepTime + 4));
+        expect(timer.mean()).to.be.greaterThan(toNanos(sleepTime - 4));
     }
 
     @test public async "@instrumented error tracking"() {
