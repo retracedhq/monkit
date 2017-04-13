@@ -18,3 +18,4 @@ ratings:
     - "src/**.ts"
 exclude_paths:
   - node_modules
+  - dist
