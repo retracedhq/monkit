@@ -12,7 +12,7 @@ Built using the `metrics` module [in npm](https://www.npmjs.com/package/metrics)
 
 ## Usage
 
-** Instrumenting Methods **
+**Instrumenting Methods**
 
 Instrument an async method by giving it a name and wrapping it with `instrument`: 
 
@@ -31,11 +31,13 @@ console.log(monkit.getRegistry().timer("my.important.method.timer").count); // 1
 
 ```
 
-** Using Decorators **
+**Using Decorators**
 
 Methods decorated with `@instrumented` will be instrumented as `ClassName.MethodName` with timing, throughput, and error tracking:
 
-```
+```javascript
+const instrumented = require('monkit').instrumented;
+
 class MyClass {
     @instrumented
     public async myMethod(): ImportantThing {
@@ -50,7 +52,7 @@ const result = await new MyClass().myMethod();
 console.log(monkit.getRegistry().timer("MyClass.myMethod.timer").count); // 1
 ```
 
-** Reporting Metrics **
+**Reporting Metrics**
 
 Extra Reporters include 
 - a `StatsdReporter` for reporting preagregated metrics as statsd gaugues
