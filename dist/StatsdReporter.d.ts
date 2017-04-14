@@ -5,7 +5,8 @@ export default class StatsdReporter {
     private readonly registry;
     private readonly prefix;
     private readonly client;
-    constructor(registry: Registry, prefix: string, client: StatsdClient);
+    private readonly nameRewriter;
+    constructor(registry: Registry, prefix: string, client: StatsdClient, nameRewriter?: (name: string) => string);
     report(): void;
     private buildPrefix();
     private reportCounter(counter);
