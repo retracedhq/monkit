@@ -27,4 +27,10 @@ class SysdigNameRewriter {
     }
 }
 SysdigNameRewriter.BASE_DIMENSION = "__base";
+SysdigNameRewriter.CLASS_METHOD_METRIC_AGGREGATION = [
+    { position: 0, dimension: SysdigNameRewriter.BASE_DIMENSION },
+    { position: 1, dimension: "method" },
+    { position: 2, dimension: "metric" },
+    { position: 3, dimension: "aggregation" },
+];
 exports.default = SysdigNameRewriter;
