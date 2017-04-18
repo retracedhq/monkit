@@ -5,12 +5,7 @@ import SysdigNameRewriter from "../SysdigNameRewriter";
 
 @suite class SysdigNameRewriterTest {
     @test public "SysdigNameRewriter.rewrite()"() {
-        const rewriter = new SysdigNameRewriter([
-            {position: 0, dimension: SysdigNameRewriter.BASE_DIMENSION},
-            {position: 1, dimension: "method"},
-            {position: 2, dimension: "metric"},
-            {position: 3, dimension: "aggregation"},
-        ]);
+        const rewriter = new SysdigNameRewriter(SysdigNameRewriter.CLASS_METHOD_METRIC_AGGREGATION);
 
         const result = rewriter.rewriteName("MyClass.myMethod.timer.m1_rate");
 

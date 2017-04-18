@@ -9,4 +9,6 @@ const StatusPageReporter_1 = require("./StatusPageReporter");
 exports.StatusPageReporter = StatusPageReporter_1.default;
 const Registry_1 = require("./Registry");
 exports.Registry = Registry_1.default;
+const SysdigNameRewriter_1 = require("./SysdigNameRewriter");
+exports.SysdigNameRewriter = SysdigNameRewriter_1.default;
 __export(require("./metrics"));

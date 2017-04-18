@@ -14,7 +14,11 @@
     * Fix missing return statement in `Registry.getMetrics()`
 
 0.3.0 / 2017-04-10
-    * Add tests, change compilation target to ES6, fix a few reporter bugs
+    * Add tests, change compilation target to ES6, fix a few reporter bugs,
+    * Swap out `node-statsd-client` for `statsd-client`,  breaking change to StatsdReporter constructor
 
 0.3.1 / 2017-04-13
     * Support for name-rewriting hook in StatsdReporter, add Sysdig rewriter
+
+0.3.2 / 2017-04-17
+    * Export name rewriter, fix bug with `@types/statsd-client` typedefs not being included in npm package

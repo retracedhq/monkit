@@ -38,6 +38,13 @@ export interface DimensionMapping {
 export default class SysdigNameRewriter {
 
     public static readonly BASE_DIMENSION = "__base";
+    public static readonly CLASS_METHOD_METRIC_AGGREGATION: DimensionMapping[] = [
+        { position: 0, dimension: SysdigNameRewriter.BASE_DIMENSION },
+        { position: 1, dimension: "method" },
+        { position: 2, dimension: "metric" },
+        { position: 3, dimension: "aggregation" },
+    ];
+
     private readonly schema: DimensionMapping[];
 
     constructor(schema: DimensionMapping[]) {
