@@ -113,13 +113,13 @@ export default class StatusPageReporter {
 
     private reportTimer(timer): void {
         this.reportMetric(`${timer.name}.count`, timer.count());
-        this.reportMetric(`${timer.name}.mean_rate`, timer.meanRate());
-        this.reportMetric(`${timer.name}.m1_rate`, timer.oneMinuteRate());
-        this.reportMetric(`${timer.name}.m5_rate`, timer.fiveMinuteRate());
-        this.reportMetric(`${timer.name}.m15_rate`, timer.fifteenMinuteRate());
+        this.reportMetric(`${timer.name}.mean_rate`, toOpsPerMin(timer.meanRate()));
+        this.reportMetric(`${timer.name}.m1_rate`, toOpsPerMin(timer.oneMinuteRate()));
+        this.reportMetric(`${timer.name}.m5_rate`, toOpsPerMin(timer.fiveMinuteRate()));
+        this.reportMetric(`${timer.name}.m15_rate`, toOpsPerMin(timer.fifteenMinuteRate()));
 
         const percentiles = timer.percentiles([.50, .75, .95, .98, .99, .999]);
-        this.reportMetric(`${timer.name}.mean`, toMs(timer.min()));
+        this.reportMetric(`${timer.name}.min`, toMs(timer.min()));
         this.reportMetric(`${timer.name}.mean`, toMs(timer.mean()));
         this.reportMetric(`${timer.name}.max`, toMs(timer.max()));
         this.reportMetric(`${timer.name}.stddev`, toMs(timer.stdDev()));
@@ -135,7 +135,7 @@ export default class StatusPageReporter {
         this.reportMetric(`${histogram.name}.count`, histogram.count);
 
         const percentiles = histogram.percentiles([.50, .75, .95, .98, .99, .999]);
-        this.reportMetric(`${histogram.name}.mean`, histogram.min);
+        this.reportMetric(`${histogram.name}.min`, histogram.min);
         this.reportMetric(`${histogram.name}.mean`, histogram.mean());
         this.reportMetric(`${histogram.name}.max`, histogram.max);
         this.reportMetric(`${histogram.name}.stddev`, histogram.stdDev());
