@@ -58,10 +58,10 @@ class StatsdReporter {
     }
     reportTimer(timer) {
         this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${timer.name}.count`), timer.count());
-        this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${timer.name}.mean_rate`), timer.meanRate());
-        this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${timer.name}.m1_rate`), timer.oneMinuteRate());
-        this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${timer.name}.m5_rate`), timer.fiveMinuteRate());
-        this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${timer.name}.m15_rate`), timer.fifteenMinuteRate());
+        this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${timer.name}.mean_rate`), metrics_1.toOpsPerMin(timer.meanRate()));
+        this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${timer.name}.m1_rate`), metrics_1.toOpsPerMin(timer.oneMinuteRate()));
+        this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${timer.name}.m5_rate`), metrics_1.toOpsPerMin(timer.fiveMinuteRate()));
+        this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${timer.name}.m15_rate`), metrics_1.toOpsPerMin(timer.fifteenMinuteRate()));
         const percentiles = timer.percentiles([.50, .75, .95, .98, .99, .999]);
         this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${timer.name}.min`), metrics_1.toMs(timer.min()));
         this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${timer.name}.mean`), metrics_1.toMs(timer.mean()));

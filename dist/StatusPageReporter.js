@@ -71,12 +71,12 @@ class StatusPageReporter {
     ;
     reportTimer(timer) {
         this.reportMetric(`${timer.name}.count`, timer.count());
-        this.reportMetric(`${timer.name}.mean_rate`, timer.meanRate());
-        this.reportMetric(`${timer.name}.m1_rate`, timer.oneMinuteRate());
-        this.reportMetric(`${timer.name}.m5_rate`, timer.fiveMinuteRate());
-        this.reportMetric(`${timer.name}.m15_rate`, timer.fifteenMinuteRate());
+        this.reportMetric(`${timer.name}.mean_rate`, metrics_1.toOpsPerMin(timer.meanRate()));
+        this.reportMetric(`${timer.name}.m1_rate`, metrics_1.toOpsPerMin(timer.oneMinuteRate()));
+        this.reportMetric(`${timer.name}.m5_rate`, metrics_1.toOpsPerMin(timer.fiveMinuteRate()));
+        this.reportMetric(`${timer.name}.m15_rate`, metrics_1.toOpsPerMin(timer.fifteenMinuteRate()));
         const percentiles = timer.percentiles([.50, .75, .95, .98, .99, .999]);
-        this.reportMetric(`${timer.name}.mean`, metrics_1.toMs(timer.min()));
+        this.reportMetric(`${timer.name}.min`, metrics_1.toMs(timer.min()));
         this.reportMetric(`${timer.name}.mean`, metrics_1.toMs(timer.mean()));
         this.reportMetric(`${timer.name}.max`, metrics_1.toMs(timer.max()));
         this.reportMetric(`${timer.name}.stddev`, metrics_1.toMs(timer.stdDev()));
@@ -91,7 +91,7 @@ class StatusPageReporter {
     reportHistogram(histogram) {
         this.reportMetric(`${histogram.name}.count`, histogram.count);
         const percentiles = histogram.percentiles([.50, .75, .95, .98, .99, .999]);
-        this.reportMetric(`${histogram.name}.mean`, histogram.min);
+        this.reportMetric(`${histogram.name}.min`, histogram.min);
         this.reportMetric(`${histogram.name}.mean`, histogram.mean());
         this.reportMetric(`${histogram.name}.max`, histogram.max);
         this.reportMetric(`${histogram.name}.stddev`, histogram.stdDev());
