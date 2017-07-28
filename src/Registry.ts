@@ -1,5 +1,7 @@
 import * as metrics from "metrics";
 
+import Gauge from "./Gauge";
+
 export default class Registry {
 
     private readonly metrics: any;
@@ -42,6 +44,7 @@ export default class Registry {
         let timers: any[] = [];
         let counters: any[] = [];
         let histograms: any[] = [];
+        let gauges: any[] = [];
 
         for (let name of Object.keys(this.metrics)) {
             let metric = this.metrics[name];
@@ -55,9 +58,11 @@ export default class Registry {
                 counters.push(metric);
             } else if (metricType === metrics.Histogram.prototype) {
                 histograms.push(metric);
+            } else if (metricType === Gauge.prototype) {
+                gauges.push(metric);
             }
         }
-        return { meters, timers, counters, histograms };
+        return { meters, timers, counters, histograms, gauges };
     }
 
     /** get or create a meter with the given name */
@@ -80,7 +85,12 @@ export default class Registry {
         return this.getOrCreate(name, metrics.Counter);
     }
 
-    private getOrCreate(name: string, ctor: ObjectConstructor) {
+    /** get or create a gauge with the given name */
+    public gauge(name: string) {
+        return this.getOrCreate(name, Gauge);
+    }
+
+    private getOrCreate(name: string, ctor: ObjectConstructor|typeof Gauge) {
 
         if (!this.getMetric(name)) {
             this.addMetric(name, new ctor());

@@ -37,6 +37,11 @@ class StatusPageReporter {
                 }
             });
         }
+        if (metrics.gauges.length !== 0) {
+            metrics.gauges.forEach((gauge) => {
+                this.reportGauge(gauge);
+            });
+        }
     }
     reportMetric(name, value) {
         const metricId = this.metricIds[name];
@@ -101,6 +106,10 @@ class StatusPageReporter {
         this.reportMetric(`${histogram.name}.p98`, percentiles[.98]);
         this.reportMetric(`${histogram.name}.p99`, percentiles[.99]);
         this.reportMetric(`${histogram.name}.p999`, percentiles[.999]);
+    }
+    ;
+    reportGauge(gauge) {
+        this.reportMetric(`${gauge.name}`, gauge.value);
     }
     ;
 }

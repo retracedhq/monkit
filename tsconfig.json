@@ -19,6 +19,7 @@
         "./src/StatusPageReporter.ts",
         "./src/SysdigNameRewriter.ts",
         "./src/Registry.ts",
+		"./src/Gauge.ts",
         "./src/index.ts",
         "./src/metrics.ts",
         "./src/test/MetricsTest.ts",

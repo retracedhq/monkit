@@ -74,6 +74,12 @@ export default class StatusPageReporter {
                 }
             });
         }
+
+        if (metrics.gauges.length !== 0) {
+            metrics.gauges.forEach((gauge) => {
+                this.reportGauge(gauge);
+            });
+        }
     }
 
     public reportMetric(name, value): void {
@@ -147,4 +153,7 @@ export default class StatusPageReporter {
         this.reportMetric(`${histogram.name}.p999`, percentiles[.999]);
     };
 
+    private reportGauge(gauge): void {
+        this.reportMetric(`${gauge.name}`, gauge.value);
+    };
 }
