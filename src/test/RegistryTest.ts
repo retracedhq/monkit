@@ -43,6 +43,14 @@ const registry = new Registry();
         expect(mean).to.equal(150);
     };
 
+    @test public "Registry#gauge(name)"() {
+        registry.gauge("how.many").set(10);
+
+        const value = registry.gauge("how.many").value;
+
+        expect(value).to.equal(10);
+    }
+
     @test public "Registry#getMetrics()"() {
         const r = new Registry();
         r.counter("foo.counter").dec(100);

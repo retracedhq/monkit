@@ -19,6 +19,7 @@ const once = TypeMoq.Times.once;
         registry.meter("foo.meter").mark();
         registry.timer("foo.timer").update(fiveMsInNanos);
         registry.histogram("foo.histogram").update(200);
+        registry.gauge("foo.gauge").set(10);
 
         const reporter = new StatsdReporter(registry, "prefix", client.object);
 
@@ -47,6 +48,8 @@ const once = TypeMoq.Times.once;
         client.verify(x => x.gauge("prefix.foo.histogram.p98", 200), once());
         client.verify(x => x.gauge("prefix.foo.histogram.p99", 200), once());
         client.verify(x => x.gauge("prefix.foo.histogram.p999", 200), once());
+
+        client.verify(x => x.gauge("prefix.foo.gauge", 10), once());
     }
 
     @test public "StatsdReporter#report() without prefix"() {
@@ -59,6 +62,7 @@ const once = TypeMoq.Times.once;
         registry.meter("foo.meter").mark();
         registry.timer("foo.timer").update(fiveMsInNanos);
         registry.histogram("foo.histogram").update(200);
+        registry.gauge("foo.gauge").set(10);
 
         const reporter = new StatsdReporter(registry, "", client.object);
 
@@ -87,6 +91,8 @@ const once = TypeMoq.Times.once;
         client.verify(x => x.gauge("foo.histogram.p98", 200), once());
         client.verify(x => x.gauge("foo.histogram.p99", 200), once());
         client.verify(x => x.gauge("foo.histogram.p999", 200), once());
+
+        client.verify(x => x.gauge("foo.gauge", 10), once());
     }
     @test public "StatsdReporter#report() execption"() {
         const client = TypeMoq.Mock.ofType(StatsdClient);
@@ -114,6 +120,7 @@ const once = TypeMoq.Times.once;
         registry.meter("foo.meter").mark();
         registry.timer("foo.timer").update(fiveMsInNanos);
         registry.histogram("foo.histogram").update(200);
+        registry.gauge("foo.gauge").set(10);
 
         const reporter = new StatsdReporter(registry, "prefix", client.object, s => `${s}.${s}`);
 
@@ -142,5 +149,7 @@ const once = TypeMoq.Times.once;
         client.verify(x => x.gauge("prefix.foo.histogram.p98.prefix.foo.histogram.p98", 200), once());
         client.verify(x => x.gauge("prefix.foo.histogram.p99.prefix.foo.histogram.p99", 200), once());
         client.verify(x => x.gauge("prefix.foo.histogram.p999.prefix.foo.histogram.p999", 200), once());
+
+        client.verify(x => x.gauge("prefix.foo.gauge.prefix.foo.gauge", 10), once());
     }
 }

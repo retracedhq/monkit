@@ -116,4 +116,31 @@ import Registry from "../Registry";
         reporter.report();
     }
 
+    @test public "StatusPageReporter#report() with gauge"() {
+
+        const value = 10;
+
+        const registry = new Registry();
+        registry.gauge("foo.gauge").set(value);
+
+        const reporter = new StatusPageReporter(
+            registry,
+            "api.statuspage.io",
+            "some-page-id",
+            "some-api-token",
+            { "foo.gaugue": "dunno" },
+        );
+
+        nock("https://api.statuspage.io", {
+            reqheaders: {
+                Authorization: "OAuth some-api-token",
+            },
+        }).post(
+            "/v1/pages/some-page-id/metrics/dunno/data.json",
+            (body) => body.indexOf("data[timestamp]") !== -1 &&
+                      body.indexOf(`data[value]"\r\n\r\n${value}`) !== -1,
+        ).reply(200);
+
+        reporter.report();
+    }
 }

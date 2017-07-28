@@ -62,6 +62,12 @@ export default class StatsdReporter {
                     }
                 });
             }
+
+            if (metrics.gauges.length !== 0) {
+                metrics.gauges.forEach((gauge) => {
+                    this.reportGauge(gauge);
+                });
+            }
         } catch (err) {
             console.error("Failed to report metrics to statsd:", err);
         }
@@ -123,4 +129,7 @@ export default class StatsdReporter {
         this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${histogram.name}.p999`), percentiles[.999]);
     }
 
+    private reportGauge(gauge): void {
+        this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${gauge.name}`), gauge.value);
+    }
 }
