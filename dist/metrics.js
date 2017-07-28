@@ -31,6 +31,10 @@ function counter(name) {
     return registry.counter(name);
 }
 exports.counter = counter;
+function gauge(name) {
+    return registry.gauge(name);
+}
+exports.gauge = gauge;
 function toOpsPerMin(rate) {
     return rate * 60;
 }

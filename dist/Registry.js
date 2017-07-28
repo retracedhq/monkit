@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const metrics = require("metrics");
+const Gauge_1 = require("./Gauge");
 class Registry {
     constructor(metrics) {
         this.metrics = metrics || {};
@@ -16,10 +17,11 @@ class Registry {
         return true;
     }
     getMetrics() {
-        let meters = [];
-        let timers = [];
-        let counters = [];
-        let histograms = [];
+        const meters = [];
+        const timers = [];
+        const counters = [];
+        const histograms = [];
+        const gauges = [];
         for (let name of Object.keys(this.metrics)) {
             let metric = this.metrics[name];
             metric.name = name;
@@ -36,8 +38,11 @@ class Registry {
             else if (metricType === metrics.Histogram.prototype) {
                 histograms.push(metric);
             }
+            else if (metricType === Gauge_1.default.prototype) {
+                gauges.push(metric);
+            }
         }
-        return { meters, timers, counters, histograms };
+        return { meters, timers, counters, histograms, gauges };
     }
     meter(name) {
         return this.getOrCreate(name, metrics.Meter);
@@ -50,6 +55,9 @@ class Registry {
     }
     counter(name) {
         return this.getOrCreate(name, metrics.Counter);
+    }
+    gauge(name) {
+        return this.getOrCreate(name, Gauge_1.default);
     }
     getOrCreate(name, ctor) {
         if (!this.getMetric(name)) {

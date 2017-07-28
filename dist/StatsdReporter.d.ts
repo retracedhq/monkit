@@ -13,4 +13,5 @@ export default class StatsdReporter {
     private reportMeter(meter);
     private reportTimer(timer);
     private reportHistogram(histogram);
+    private reportGauge(gauge);
 }

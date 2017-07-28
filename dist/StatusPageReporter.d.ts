@@ -12,4 +12,5 @@ export default class StatusPageReporter {
     private reportMeter(meter);
     private reportTimer(timer);
     private reportHistogram(histogram);
+    private reportGauge(gauge);
 }

@@ -8,5 +8,6 @@ export default class Registry {
     timer(name: string): any;
     histogram(name: string): any;
     counter(name: string): any;
+    gauge(name: string): any;
     private getOrCreate(name, ctor);
 }

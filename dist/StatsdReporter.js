@@ -35,6 +35,11 @@ class StatsdReporter {
                     }
                 });
             }
+            if (metrics.gauges.length !== 0) {
+                metrics.gauges.forEach((gauge) => {
+                    this.reportGauge(gauge);
+                });
+            }
         }
         catch (err) {
             console.error("Failed to report metrics to statsd:", err);
@@ -87,6 +92,9 @@ class StatsdReporter {
         this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${histogram.name}.p98`), percentiles[.98]);
         this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${histogram.name}.p99`), percentiles[.99]);
         this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${histogram.name}.p999`), percentiles[.999]);
+    }
+    reportGauge(gauge) {
+        this.client.gauge(this.nameRewriter(`${this.buildPrefix()}${gauge.name}`), gauge.value);
     }
 }
 exports.default = StatsdReporter;
