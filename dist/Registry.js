@@ -17,11 +17,11 @@ class Registry {
         return true;
     }
     getMetrics() {
-        let meters = [];
-        let timers = [];
-        let counters = [];
-        let histograms = [];
-        let gauges = [];
+        const meters = [];
+        const timers = [];
+        const counters = [];
+        const histograms = [];
+        const gauges = [];
         for (let name of Object.keys(this.metrics)) {
             let metric = this.metrics[name];
             metric.name = name;

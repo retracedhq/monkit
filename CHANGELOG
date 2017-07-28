@@ -25,3 +25,6 @@
 
 0.3.3 / 2017-04-17
     * Tweak some copy-paste bugs in StatsdReporter, change timer rate reporting to ops/min instead of ops/s
+
+0.4.0 / 2017-07-28
+	* Add Gauge metric type

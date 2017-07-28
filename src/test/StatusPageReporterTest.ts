@@ -128,7 +128,7 @@ import Registry from "../Registry";
             "api.statuspage.io",
             "some-page-id",
             "some-api-token",
-            { "foo.gaugue": "dunno" },
+            { "foo.gauge": "metricID1" },
         );
 
         nock("https://api.statuspage.io", {
@@ -136,7 +136,7 @@ import Registry from "../Registry";
                 Authorization: "OAuth some-api-token",
             },
         }).post(
-            "/v1/pages/some-page-id/metrics/dunno/data.json",
+            "/v1/pages/some-page-id/metrics/metricID1/data.json",
             (body) => body.indexOf("data[timestamp]") !== -1 &&
                       body.indexOf(`data[value]"\r\n\r\n${value}`) !== -1,
         ).reply(200);

@@ -55,7 +55,7 @@ console.log(monkit.getRegistry().timer("MyClass.myMethod.timer").count); // 1
 **Reporting Metrics**
 
 Extra Reporters include 
-- a `StatsdReporter` for reporting preagregated metrics as statsd gaugues
+- a `StatsdReporter` for reporting preagregated metrics as statsd gauges
 - a `StatusPageReporter`, which can be used to periodically send metrics to statuspage.io
 
 At time of writing, still need to tweak `monkit.Registry` to make it compatible with other reporters from the `metrics` pacakge.
