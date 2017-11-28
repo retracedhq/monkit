@@ -1,11 +1,11 @@
 # monkit
 
 [![CircleCI](https://circleci.com/gh/retracedhq/monkit.svg?style=svg&circle-token=5fb991c02e8855f213eec652e45ebf09403ad5d0)](https://circleci.com/gh/retracedhq/monkit)
-[![Code Climate](https://codeclimate.com/github/retracedhq/monkit/badges/gpa.svg)](https://codeclimate.com/github/retracedhq/monkit) 
+[![Code Climate](https://codeclimate.com/github/retracedhq/monkit/badges/gpa.svg)](https://codeclimate.com/github/retracedhq/monkit)
 [![Test Coverage](https://codeclimate.com/github/retracedhq/monkit/badges/coverage.svg)](https://codeclimate.com/github/retracedhq/monkit/coverage)
 
 
-Small App Metrics Toolkit for NodeJS/Typescript 
+Small App Metrics Toolkit for NodeJS/Typescript
 
 Some custom metrics reporters and a partial port of the java [instrumentor](https://github.com/sproutsocial/instrumentor) project.
 Built using the `metrics` module [in npm](https://www.npmjs.com/package/metrics).
@@ -14,7 +14,7 @@ Built using the `metrics` module [in npm](https://www.npmjs.com/package/metrics)
 
 **Instrumenting Methods**
 
-Instrument an async method by giving it a name and wrapping it with `instrument`: 
+Instrument an async method by giving it a name and wrapping it with `instrument`:
 
 ```javascript
 const monkit = require('monkit');
@@ -27,7 +27,7 @@ const result = await wrapped();
 
 // By default, metrics will be stored in the project registry available via `monkit.getRegistry()`
 
-console.log(monkit.getRegistry().timer("my.important.method.timer").count); // 1
+console.log(monkit.getRegistry().timer("my.important.method.timer").count()); // 1
 
 ```
 
@@ -49,12 +49,12 @@ const result = await new MyClass().myMethod();
 
 // By default, metrics will be stored in the project registry available via `monkit.getRegistry()`
 
-console.log(monkit.getRegistry().timer("MyClass.myMethod.timer").count); // 1
+console.log(monkit.getRegistry().timer("MyClass.myMethod.timer").count()); // 1
 ```
 
 **Reporting Metrics**
 
-Extra Reporters include 
+Extra Reporters include
 - a `StatsdReporter` for reporting preagregated metrics as statsd gauges
 - a `StatusPageReporter`, which can be used to periodically send metrics to statuspage.io
 
