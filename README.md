@@ -18,12 +18,9 @@ Instrument an async method by giving it a name and wrapping it with `instrument`
 
 ```javascript
 const monkit = require('monkit');
-const wrapped = monkit.instrument("my.important.method", async () => {
+const result = await monkit.instrument("my.important.method", async () => {
     return await doImportantWork();
 });
-
-
-const result = await wrapped();
 
 // By default, metrics will be stored in the project registry available via `monkit.getRegistry()`
 
