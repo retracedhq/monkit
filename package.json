@@ -1,7 +1,7 @@
 {
     "name": "monkit",
     "author": "Replicated, Inc.",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "engines": {
         "node": ">=4.3.2"
     },
@@ -27,7 +27,8 @@
     "main": "dist/index.js",
     "typings": "dist/index",
     "files": [
-        "dist/"
+        "dist/",
+        "CHANGELOG"
     ],
     "scripts": {
         "prepublish": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p .",
@@ -51,6 +52,7 @@
         "mocha-typescript": "^1.0.15",
         "nock": "^9.0.11",
         "publish": "^0.6.0",
+        "ts-node": "^4.1.0",
         "tslint": "^4.3.1",
         "typemoq": "^1.4.1",
         "typescript": "^2.2.2"
@@ -58,6 +60,7 @@
     "dependencies": {
         "@types/statsd-client": "^0.1.30",
         "form-urlencoded": "^1.5.0",
+        "hot-shots": "^5.0.1",
         "lodash": "^4.17.4",
         "metrics": "^0.1.11",
         "request": "^2.81.0",

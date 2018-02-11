@@ -1,8 +1,9 @@
 import * as metrics from "metrics";
 
-import Gauge from "./Gauge";
+import {default as GGauge} from "./Gauge";
+import { Registry } from "./types";
 
-export default class Registry {
+export default class ReadableRegistry implements Registry {
 
     private readonly metrics: any;
 
@@ -58,7 +59,7 @@ export default class Registry {
                 counters.push(metric);
             } else if (metricType === metrics.Histogram.prototype) {
                 histograms.push(metric);
-            } else if (metricType === Gauge.prototype) {
+            } else if (metricType === GGauge.prototype) {
                 gauges.push(metric);
             }
         }
@@ -87,10 +88,10 @@ export default class Registry {
 
     /** get or create a gauge with the given name */
     public gauge(name: string) {
-        return this.getOrCreate(name, Gauge);
+        return this.getOrCreate(name, GGauge);
     }
 
-    private getOrCreate(name: string, ctor: ObjectConstructor|typeof Gauge) {
+    private getOrCreate(name: string, ctor: ObjectConstructor|typeof GGauge) {
 
         if (!this.getMetric(name)) {
             this.addMetric(name, new ctor());
