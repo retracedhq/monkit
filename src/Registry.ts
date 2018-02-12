@@ -1,8 +1,9 @@
 import * as metrics from "metrics";
 
-import Gauge from "./Gauge";
+import {default as Gauge} from "./Gauge";
+import { Registry } from "./types";
 
-export default class Registry {
+export default class ReadableRegistry implements Registry {
 
     private readonly metrics: any;
 

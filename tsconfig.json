@@ -18,6 +18,7 @@
         "./src/StatsdReporter.ts",
         "./src/StatusPageReporter.ts",
         "./src/SysdigNameRewriter.ts",
+        "./src/DataDogMetricRegistry.ts",
         "./src/Registry.ts",
 		"./src/Gauge.ts",
         "./src/index.ts",
@@ -26,6 +27,7 @@
         "./src/test/RegistryTest.ts",
         "./src/test/StatsdReporterTest.ts",
         "./src/test/SysdigNameRewriterTest.ts",
-        "./src/test/StatusPageReporterTest.ts"
+        "./src/test/StatusPageReporterTest.ts",
+      "./src/test/DataDogMetricRegistryTest.ts"
     ]
 }

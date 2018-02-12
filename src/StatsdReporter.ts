@@ -19,7 +19,7 @@ export default class StatsdReporter {
     private readonly nameRewriter: (name: string) => string;
 
     /**
-     * @param {Registry} registry the metric registry
+     * @param {ReadableRegistry} registry the metric registry
      * @param {String}   prefix A string to prefix on each metric (i.e. app.hostserver)
      * @param {StatsdClient} client The statsd client 
      */
