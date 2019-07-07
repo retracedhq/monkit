@@ -1,69 +1,72 @@
 {
-    "name": "monkit",
-    "author": "Replicated, Inc.",
-    "version": "0.5.0",
-    "engines": {
-        "node": ">=4.3.2"
-    },
-    "license": "MIT",
-    "repository": "https://github.com/retracedhq/monkit.git",
-    "bugs": {
-        "email": "bugs@retraced.io",
-        "url": "https://github.com/retracedhq/monkit/issues"
-    },
-    "description": "Application Metrics Toolkit for NodeJS/Typescript",
-    "keywords": [
-        "audit",
-        "log",
-        "retraced",
-        "replicated",
-        "metrics",
-        "statsd",
-        "monitoring"
-    ],
-    "contributors": [
-        "Dexter Horthy <dexter@retraced.io>"
-    ],
-    "main": "dist/index.js",
-    "typings": "dist/index",
-    "files": [
-        "dist/",
-        "CHANGELOG"
-    ],
-    "scripts": {
-        "prepublish": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p .",
-        "test": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p . && mocha ./dist/test/*.js",
-        "cover": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p . && istanbul cover _mocha -- ./dist/test/*.js",
-        "cover-xml": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p . && istanbul cover _mocha -- -R mocha-junit-reporter ./dist/test/*.js",
-        "report-coverage": "codeclimate-test-reporter < ./coverage/lcov.info",
-        "publish-if-version-changed": "publish"
-    },
-    "devDependencies": {
-        "@types/chai": "^3.4.34",
-        "@types/lodash": "^4.14.52",
-        "@types/node": "^7.0.0",
-        "@types/request": "^0.0.42",
-        "chai": "^3.5.0",
-        "codeclimate-test-reporter": "^0.4.1",
-        "coveralls": "^2.13.0",
-        "istanbul": "^0.4.5",
-        "mocha": "^3.2.0",
-        "mocha-junit-reporter": "^1.13.0",
-        "mocha-typescript": "^1.0.15",
-        "nock": "^9.0.11",
-        "publish": "^0.6.0",
-        "ts-node": "^4.1.0",
-        "tslint": "^4.3.1",
-        "typemoq": "^1.4.1",
-        "typescript": "^2.2.2"
-    },
-    "dependencies": {
-        "@types/statsd-client": "^0.1.30",
-        "form-urlencoded": "^1.5.0",
-        "hot-shots": "^5.0.1",
-        "lodash": "^4.17.5",
-        "metrics": "^0.1.11",
-        "request": "^2.84.0",
-        "statsd-client": "^0.2.4"
-    }
+  "name": "monkit",
+  "author": "Replicated, Inc.",
+  "version": "0.5.0",
+  "engines": {
+    "node": ">=4.3.2"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/retracedhq/monkit.git",
+  "bugs": {
+    "email": "bugs@retraced.io",
+    "url": "https://github.com/retracedhq/monkit/issues"
+  },
+  "description": "Application Metrics Toolkit for NodeJS/Typescript",
+  "keywords": [
+    "audit",
+    "log",
+    "retraced",
+    "replicated",
+    "metrics",
+    "statsd",
+    "monitoring"
+  ],
+  "contributors": [
+    "Dexter Horthy <dexter@retraced.io>"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index",
+  "files": [
+    "dist/",
+    "CHANGELOG"
+  ],
+  "scripts": {
+    "prepublish": "npm run snyk-protect; rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p .",
+    "test": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p . && mocha ./dist/test/*.js",
+    "cover": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p . && istanbul cover _mocha -- ./dist/test/*.js",
+    "cover-xml": "rm -rf ./dist && tslint --project ./tsconfig.json && tsc -p . && istanbul cover _mocha -- -R mocha-junit-reporter ./dist/test/*.js",
+    "report-coverage": "codeclimate-test-reporter < ./coverage/lcov.info",
+    "publish-if-version-changed": "publish",
+    "snyk-protect": "snyk protect"
+  },
+  "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/lodash": "^4.14.52",
+    "@types/node": "^7.0.0",
+    "@types/request": "^0.0.42",
+    "chai": "^3.5.0",
+    "codeclimate-test-reporter": "^0.4.1",
+    "coveralls": "^2.13.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "mocha-junit-reporter": "^1.13.0",
+    "mocha-typescript": "^1.0.15",
+    "nock": "^9.0.11",
+    "publish": "^0.6.0",
+    "ts-node": "^4.1.0",
+    "tslint": "^4.3.1",
+    "typemoq": "^1.4.1",
+    "typescript": "^2.2.2"
+  },
+  "dependencies": {
+    "@types/statsd-client": "^0.1.30",
+    "form-urlencoded": "^1.5.0",
+    "hot-shots": "^5.0.1",
+    "lodash": "^4.17.5",
+    "metrics": "^0.1.11",
+    "request": "^2.84.0",
+    "statsd-client": "^0.2.4",
+    "snyk": "^1.192.3"
+  },
+  "snyk": true
 }
